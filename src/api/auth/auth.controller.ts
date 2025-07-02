@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { registerSchema } from "./authValidator";
 import { registerUserService } from "./auth.service";
-import prisma from "@/config/prisma"
+
 
 
 
@@ -32,27 +32,3 @@ export const register = async (req:Request, res:Response):Promise<any> => {
 
 };
 
-export const getProfile = async(req:Request, res:Response):Promise<any>=>{
-    const userId = (req as any).userId;
-
-    try{
-        const user= await prisma.user.findUnique({
-            where: {id: userId},
-            select: {
-                id:true,
-                email:true,
-            }
-        });
-
-        if(!user){
-            return res.status(404).json({message:"Kullanıcı bulunamadı."});
-
-        }
-
-        res.json({user});
-
-    }catch(error){
-        res.status(500).json({message: "Sunucu hatası", error})
-    }
-
-};
