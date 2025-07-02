@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2016",                  // Modern JS hedefi
+    "module": "commonjs",                // Node.js için uygun modül sistemi
+    "baseUrl": "./src",                  // Alias için src kök dizin
+    "paths": {
+      "@/*": ["*"]                       // Örn: @/config/prisma
+    },
+    "rootDir": "./src",                  // Kaynak dosyaların yeri
+    "outDir": "./dist",                  // Derlenmiş JS dosyalarının çıkış yeri
+    "strict": true,                      // Katı type kontrolü
+    "esModuleInterop": true,            // CommonJS modüllerle uyum
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true                // node_modules içindeki türleri kontrol etme
+  },
+  "include": ["src"],                   // Derlenecek dosyalar
+  "exclude": ["node_modules", "dist"]  // Hariç tutulacak dizinler
+}

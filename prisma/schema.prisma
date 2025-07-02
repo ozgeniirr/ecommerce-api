@@ -1,0 +1,33 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id      Int     @id @default(autoincrement())
+  email   String  @unique
+  password String
+  orders  Order[]
+}
+
+model Product {
+  id     Int      @id @default(autoincrement())
+  name   String
+  price  Float
+  stock  Int
+  orders Order[]  @relation("ProductOrders")
+}
+
+model Order {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  userId    Int
+  user      User       @relation(fields: [userId], references: [id])
+  products  Product[]  @relation("ProductOrders")
+}
