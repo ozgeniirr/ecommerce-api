@@ -6,7 +6,6 @@ export const getProfileService = async (userId: number) => {
     select: {
       id: true,
       email: true,
-      // Buraya başka alanlar eklenecekse ekleyebilirsin.
     },
   });
 
