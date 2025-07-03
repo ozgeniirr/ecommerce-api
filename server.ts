@@ -5,7 +5,7 @@ import usersRoutes from './src/api/users/users.routes';
 import productRoutes from "./src/api/products/products.routes"
 dotenv.config();
 const app: Express = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
