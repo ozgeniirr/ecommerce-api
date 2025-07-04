@@ -15,3 +15,37 @@ export const createProductService = async (productData: { name: string; price: n
   });
   return product;
 };
+
+
+export const updateProductService = async (id:number, productData: { name: string, price: number, stock:number }) => {
+  const existingProduct = await prisma.product.findUnique({where: { id }});
+ 
+  if(!existingProduct){
+    throw new Error("NOT_FOUND")
+  }
+
+  const updatedProduct = await prisma.product.update({
+
+    where: { id },
+    data: { name: productData.name,
+      price: productData.price,
+      stock: productData.stock
+
+    }
+  });
+  return updatedProduct;
+
+};
+
+
+export const deleteProductService = async (id: number) => {
+  const existingProduct = await prisma.product.findUnique({ where: { id } });
+
+  if (!existingProduct) {
+    throw new Error("NOT_FOUND");
+  }
+
+  const deletedProduct = await prisma.product.delete({ where: { id } });
+
+  return deletedProduct;
+};
