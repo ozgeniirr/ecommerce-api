@@ -8,3 +8,7 @@ export const createOrderSchema = z.object({
     })
   ).min(1, "En az bir ürün seçmelisiniz")
 });
+
+export const cancelOrderSchema = z.object({
+  id: z.string().regex(/^\d+$/, "Geçerli bir sipariş ID girilmeli")
+});
