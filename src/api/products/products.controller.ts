@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { createProductSchema, updateProductSchema } from "api/products/productsValidator";
-import { createProductService, deleteProductService, updateProductService} from "./products.service";
+import { createProductSchema, searchProductSchema, updateProductSchema  } from "api/products/productsValidator";
+import { createProductService, deleteProductService, getProductsService, updateProductService} from "./products.service";
 
 
 export const createProduct = async (req: Request, res: Response): Promise<any> =>{
@@ -66,4 +66,31 @@ export const deleteProduct = async (req:Request, res:Response): Promise<any> => 
         return res.status(500).json({message:"Sunucu hatası"})
     }
 
+};
+
+export const getProducts = async (req:Request, res:Response): Promise<any> => {
+    const parsed = searchProductSchema.safeParse(req.query);
+
+    if(!parsed.success){
+        return res.status(400).json({
+            message:"Lütfen geçerli bir arama terimi giriniz",
+            errors: parsed.error.flatten().fieldErrors
+        });
+
+    }
+
+    try{
+        const products = await getProductsService (parsed.data.search);
+        return res.status(200).json({
+            message:"Aradığınız ürün/ürünler: ", products
+        })
+
+
+    }catch(error:any){
+        return res.status(500).json({
+            message:"Sunucu hatası"
+        });
+
+
+    }
 }

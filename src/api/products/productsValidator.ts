@@ -12,3 +12,8 @@ export const updateProductSchema = z.object({
   price: z.number().positive("Fiyat pozitif olmalı"),
   stock: z.number().int().nonnegative("Stok negatif olamaz")
 });
+
+export const searchProductSchema = z.object({
+  search: z.string().optional().default(""),
+});
+

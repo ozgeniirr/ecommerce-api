@@ -49,3 +49,15 @@ export const deleteProductService = async (id: number) => {
 
   return deletedProduct;
 };
+
+
+export const getProductsService = async( search: string ) => {
+  const product = await prisma.product.findMany({
+    where: search
+     ? { name: { contains: search, mode: "insensitive" }}
+     : undefined,
+  });
+  return product;
+  
+}
+    
