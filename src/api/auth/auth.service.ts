@@ -14,14 +14,11 @@ export const registerUserService = async (UserData: RegisterInput)=>{
         where : {email: UserData.email,},
         
 });
-
-
 if(existingUser){
 
     throw new Error("EMAIL_EXISTS")
 
 }
-
 const hashedPassword = await bcrypt.hash(UserData.password, 11);
 const newUser = await prisma.user.create({
     data: {

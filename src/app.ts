@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
+
 import authRoutes from "@/api/auth/auth.routes";
 import userRoutes from "@/api/users/users.routes";
 import productRoutes from "@/api/products/products.routes";
@@ -16,3 +17,4 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 
 export default app;
+
