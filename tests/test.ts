@@ -1,6 +1,5 @@
-// tests/hello.test.ts
-describe('First Test', () => {
-  it('should pass', () => {
-    expect(1 + 1).toBe(2);
+describe("First Test", () => {
+  it("should fail", () => {
+    expect(2 + 2).toBe(5); // bilerek hatalı
   });
 });
